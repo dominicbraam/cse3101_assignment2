@@ -8,7 +8,6 @@ class UsersM extends Database {
 		$sql = "SELECT * FROM users WHERE username = :uname OR userid = :userid";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute(['uname'=>$uname,'userid'=>$userid]);
-
 		$user = $stmt->fetch();
 		$stmt = null;
 		return $user;

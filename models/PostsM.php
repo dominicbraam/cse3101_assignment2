@@ -8,9 +8,16 @@ class PostsM extends Database {
 		$sql = "SELECT * FROM posts";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute();
-
 		$arr = $stmt->fetchAll();
-		if(!$arr) exit('No posts exist...');
+		$stmt = null;
+		return $arr;
+	}
+
+	protected function getPost($postid){
+		$sql = "SELECT * FROM posts WHERE postid = :postid";
+		$stmt = $this->connect()->prepare($sql);
+		$stmt->execute(['postid'=>$postid]);
+		$arr = $stmt->fetch();
 		$stmt = null;
 		return $arr;
 	}

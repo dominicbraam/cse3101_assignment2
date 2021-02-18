@@ -4,13 +4,11 @@ include_once 'Database.php';
 
 class CommentsM extends Database {
 
-	protected function getComments(){
-		$sql = "SELECT * FROM comments";
+	protected function getComments($postid){
+		$sql = "SELECT * FROM comments WHERE postid = :postid";
 		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute();
-
+		$stmt->execute(['postid'=>$postid]);
 		$arr = $stmt->fetchAll();
-		if(!$arr) exit('No comments exist...');
 		$stmt = null;
 		return $arr;
 	}
