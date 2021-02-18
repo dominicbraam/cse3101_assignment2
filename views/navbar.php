@@ -1,8 +1,8 @@
 <html>
-
 	<link rel="stylesheet" href="css/style.css">
 	<ul>
-		<li class="btn-login"><a href="createPost.php">Create Post</a></li>
+		<li><a href="index.php">Home</a></li>
+		<li class="btn-login"><a href="search.php">Search</a></li>
 		<?php
 			if(isset($_SESSION['user'])){
 		?>
@@ -19,8 +19,5 @@
 		<?php
 			}
 		?>
-
-		<li><a href="index.php">Home</a></li>
 	</ul>
-
 </html>

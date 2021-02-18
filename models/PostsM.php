@@ -4,10 +4,10 @@ include_once 'Database.php';
 
 class PostsM extends Database {
 
-	protected function getPosts(){
-		$sql = "SELECT * FROM posts";
+	protected function getPosts($query){
+		$sql = "SELECT * FROM posts WHERE body LIKE :query";
 		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute();
+		$stmt->execute(['query'=>$query]);
 		$arr = $stmt->fetchAll();
 		$stmt = null;
 		return $arr;

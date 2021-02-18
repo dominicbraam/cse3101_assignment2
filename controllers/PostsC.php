@@ -3,8 +3,9 @@
 include_once '../models/PostsM.php';
 
 class PostsC extends PostsM {
-		public function gatherPosts(){
-			$results = $this->getPosts();
+		public function gatherPosts($userInput){
+			$query = "%" . $userInput . "%";
+			$results = $this->getPosts($query);
 			return $results;
 		}
 

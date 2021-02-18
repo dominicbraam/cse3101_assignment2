@@ -22,8 +22,8 @@ session_start();
 		</div>
 
 		<div class="container">
-
 			<div>
+
 				<?php
 					if(isset($_SESSION['user'])){
 				?>
@@ -36,15 +36,26 @@ session_start();
 						echo "<div class='prompt'>You need to login before you can make a post.</div>";
 					}
 				?>
+
 			</div>
 
 			<?php
 				$postsObj = new PostsC();
 				$usersObj = new UsersC();
-				$posts = $postsObj->gatherPosts();
-				if(!$posts){
-					echo "<div class='prompt'>No posts exist...</div>";
+
+				if(@$_GET['query']==false){
+					$query = "";
 				} else {
+					$query = $_GET['query'];
+				}
+
+				$posts = $postsObj->gatherPosts($query);
+				if(!$posts){
+					echo "<div class='prompt'>No posts...</div>";
+				} else {
+					if(@$_GET['query']==true){
+						echo "<div class='search-results'>Showing results containing '" . $_GET['query'] . "'</div>";
+					}
 				foreach(array_reverse($posts) as $post){
 					$username = $usersObj->getUsername($post->userid);
 			?>
